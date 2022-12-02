@@ -54,4 +54,16 @@ import os
             self.counter += 1
             return self.df.loc[self.counter - 1]["Day"], self.df.loc[self.counter - 1]["Exchange rate"]
 
-
+ if __name__ == "__main__":
+    try:
+        # obj = DateIterator()
+        # while True:
+        #     print(next(obj))
+        # obj = DateIteratorXY()
+        # while True:
+        #     print(next(obj))
+        obj = DateIteratorYearOrWeek("C:/Users/esh20/PycharmProjects/labs/lab2/2/")
+        while True:
+            print(next(obj))
+    except StopIteration:
+        print("Out of bounds")
