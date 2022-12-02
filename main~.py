@@ -7,3 +7,14 @@ class Example(QWidget):
 
     def __init__(self):
         super().__init__()
+
+        self.initUI()
+
+    def initUI(self):
+        self.resize(250, 150)
+        self.center()
+
+        self.setWindowTitle("Icon")
+        self.setWindowIcon(QIcon("dollar.jpg"))
+
+        self.show()
