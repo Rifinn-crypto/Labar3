@@ -18,3 +18,8 @@ class Example(QWidget):
         self.setWindowIcon(QIcon("dollar.jpg"))
 
         self.show()
+
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self, "Message",
+                                     "Are you sure? You want quit?", QMessageBox.Yes |
+                                     QMessageBox.No, QMessageBox.No)
