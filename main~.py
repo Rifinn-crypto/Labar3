@@ -1,16 +1,16 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox, QDesktopWidget
-from PyQt5.QtGui import QIcon
+ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox, QDesktopWidget
+ from PyQt5.QtGui import QIcon
 
-import sys
+ import sys
 
  class Example(QWidget):
 
-     def __init__(self):
+    def __init__(self):
         super().__init__()
 
         self.initUI()
 
-     def initUI(self):
+    def initUI(self):
         self.resize(250, 150)
         self.center()
 
@@ -19,7 +19,7 @@ import sys
 
         self.show()
 
-     def closeEvent(self, event):
+    def closeEvent(self, event):
         reply = QMessageBox.question(self, "Message",
                                      "Are you sure? You want quit?", QMessageBox.Yes |
                                      QMessageBox.No, QMessageBox.No)
@@ -28,7 +28,7 @@ import sys
         else:
             event.ignore()
 
-     def center(self):
+    def center(self):
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
