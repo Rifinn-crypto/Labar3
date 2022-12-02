@@ -23,3 +23,13 @@ class Example(QWidget):
         reply = QMessageBox.question(self, "Message",
                                      "Are you sure? You want quit?", QMessageBox.Yes |
                                      QMessageBox.No, QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
