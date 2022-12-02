@@ -35,5 +35,23 @@ import os
             self.counter += 1
             return self.xf.loc[self.counter - 1]["Day"], self.yf.loc[self.counter - 1]["Exchange rate"]
 
+ class DateIteratorYearOrWeek:
+
+    def __init__(self, name):
+
+        self.counter = 0
+        self.df = pd.DataFrame()
+        for root, dirs, files in os.walk(name):
+            for filename in files[-2::-1]:
+                data = os.path.join(root, filename)
+                yf = pd.read_csv(data)
+                self.df = pd.concat([self.df, yf], ignore_index=True)
+
+    def __next__(self) -> tuple:
+        if self.counter == self.df.shape[0]:
+            raise StopIteration
+        elif self.counter < self.df.shape[0]:
+            self.counter += 1
+            return self.df.loc[self.counter - 1]["Day"], self.df.loc[self.counter - 1]["Exchange rate"]
 
 
