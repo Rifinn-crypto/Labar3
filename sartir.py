@@ -11,3 +11,11 @@ def formatted_file(input_file: str) -> pd.DataFrame:
     df["Week"] = df["Day"].dt.isocalendar().week
     return df
 
+
+def clear_file(df: pd.DataFrame) -> pd.DataFrame:
+    del df["Year"]
+    del df["Week"]
+    del df["Day1"]
+    return df
+
+
