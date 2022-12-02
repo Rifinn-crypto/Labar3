@@ -11,7 +11,7 @@ import os
 
 
     def __next__(self) -> tuple:
-        if os.path.exists("C:/Users/artyo/Desktop/dataset.csv"):
+        if os.path.exists("C:/Users/esh20/Desktop/dataset.csv"):
             if self.counter == self.df.shape[0]:
                 raise StopIteration
             elif self.counter < self.df.shape[0]:
