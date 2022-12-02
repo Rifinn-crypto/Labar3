@@ -3,4 +3,4 @@ from PyQt5.QtGui import QIcon
 
 import sys
 
-
+class Example(QWidget):
