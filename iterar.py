@@ -56,13 +56,7 @@ import os
 
  if __name__ == "__main__":
     try:
-        # obj = DateIterator()
-        # while True:
-        #     print(next(obj))
-        # obj = DateIteratorXY()
-        # while True:
-        #     print(next(obj))
-        obj = DateIteratorYearOrWeek("C:/Users/esh20/PycharmProjects/labs/lab2/2/")
+        obj = DateIteratorYearOrWeek("C:/Users/esh20/PycharmProjects/Lab2/2/")
         while True:
             print(next(obj))
     except StopIteration:
