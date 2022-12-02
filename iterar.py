@@ -2,13 +2,11 @@ import pandas as pd
 import os
 
 
- class DateIterator:
-
+class DateIterator:
 
     def __init__(self):
         self.counter = 0
         self.df = pd.read_csv("C:/Users/esh20/Desktop/dataset.csv")
-
 
     def __next__(self) -> tuple:
         if os.path.exists("C:/Users/esh20/Desktop/dataset.csv"):
@@ -19,7 +17,8 @@ import os
                     return self.df.loc[self.counter - 1]["Day"], self.df.loc[self.counter - 1]["Exchange rate"]
         raise FileNotFoundError
 
- class DateIteratorXY:
+
+class DateIteratorXY:
 
     def __init__(self):
 
@@ -35,7 +34,8 @@ import os
             self.counter += 1
             return self.xf.loc[self.counter - 1]["Day"], self.yf.loc[self.counter - 1]["Exchange rate"]
 
- class DateIteratorYearOrWeek:
+
+class DateIteratorYearOrWeek:
 
     def __init__(self, name):
 
@@ -54,7 +54,8 @@ import os
             self.counter += 1
             return self.df.loc[self.counter - 1]["Day"], self.df.loc[self.counter - 1]["Exchange rate"]
 
- if __name__ == "__main__":
+
+if __name__ == "__main__":
     try:
         obj = DateIteratorYearOrWeek("C:/Users/esh20/PycharmProjects/Lab2/2/")
         while True:
