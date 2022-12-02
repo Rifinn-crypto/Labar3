@@ -3,14 +3,14 @@ from PyQt5.QtGui import QIcon
 
 import sys
 
-class Example(QWidget):
+ class Example(QWidget):
 
-    def __init__(self):
+     def __init__(self):
         super().__init__()
 
         self.initUI()
 
-    def initUI(self):
+     def initUI(self):
         self.resize(250, 150)
         self.center()
 
@@ -19,7 +19,7 @@ class Example(QWidget):
 
         self.show()
 
-    def closeEvent(self, event):
+     def closeEvent(self, event):
         reply = QMessageBox.question(self, "Message",
                                      "Are you sure? You want quit?", QMessageBox.Yes |
                                      QMessageBox.No, QMessageBox.No)
@@ -28,8 +28,14 @@ class Example(QWidget):
         else:
             event.ignore()
 
-    def center(self):
+     def center(self):
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
+
+
+ if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())
