@@ -27,4 +27,19 @@ def range_of_years(input_file: str) -> list:
     return [start_range, end_range]
 
 
+def max_week(df: pd.DataFrame) -> int:
+    start_range = df[df["Week"] == df["Week"].max()]
+    value = start_range["Week"].values[0]
+    return value
+
+
+def min_week(df: pd.DataFrame) -> int:
+    end_range = df[df["Week"] == df["Week"].min()]
+    value = end_range["Week"].values[0]
+    return value
+
+
+def write_to_file(input_file: str) -> None:
+    df = formatted_file(input_file)
+    range_of_years_list = range_of_years(input_file)
 
