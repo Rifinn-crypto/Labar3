@@ -39,3 +39,10 @@ def range_of_date(input_file: str) -> list:
     return [start_range, end_range]
 
 
+if __name__ == "__main__":
+
+    file = "C:/Users/esh20/Desktop/dataset.csv"
+
+    range_of_years = range_of_date(file)
+    for years in range(range_of_years[0], range_of_years[1] - 1, -1):
+        write_to_file(file, years)
