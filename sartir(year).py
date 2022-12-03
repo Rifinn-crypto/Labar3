@@ -31,3 +31,11 @@ def write_to_file(input_file: str, year: int) -> NoReturn:
     df.to_csv(data + ".csv", index=False)
 
 
+def range_of_date(input_file: str) -> list:
+    df = formatted_file(input_file)
+
+    start_range = df["Year"].iat[0]
+    end_range = df["Year"].iat[-1]
+    return [start_range, end_range]
+
+
