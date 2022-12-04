@@ -1,24 +1,61 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox, QDesktopWidget
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox, QDesktopWidget, QLineEdit, QLabel
 from PyQt5.QtGui import QIcon
-
+from PyQt5 import QtWidgets
+import os
 import sys
+from typing import Union
+import datetime
+import numpy
+import pandas as pd
+from PyQt5.QtWidgets import QMainWindow, QPushButton, QApplication
 
 
-class Example(QWidget):
+file = "C:/Users/esh20/Desktop/dataset.csv"
 
+def get_data(input_file: str, date: datetime.date) -> Union[numpy.float64, None]:
+    if os.path.exists(input_file):
+        df = pd.read_csv(input_file)
+        df["Day"] = pd.to_datetime(df.Day, format="%Y-%m-%d")
+        df["Day"] = df["Day"].dt.date
+        for i in range(0, df.shape[0], 1):
+            if str(df["Day"].iloc[i]).replace("-", "") == str(date).replace("-", ""):
+                return df.iloc[i]["Exchange rate"]
+        return None
+    raise FileNotFoundError
+
+
+class Example(QMainWindow):
     def __init__(self):
-        super().__init__()
-
+        super(Example, self).__init__()
         self.initUI()
 
+
     def initUI(self):
+        self.lbl = QLabel(self)
         self.resize(250, 150)
         self.center()
-
+        butt = QPushButton("button 1", self)
+        butt.move(30, 50)
+        self.qle = QLineEdit(self)
+        self.qle.move(60, 100)
+        butt.setText("нажми")
+        butt.clicked.connect(self.handleButton)
         self.setWindowTitle("Icon")
         self.setWindowIcon(QIcon("dollar.jpg"))
 
-        self.show()
+
+    def handleButton(self):
+        self.lbl.setText("")
+        self.lbl.adjustSize()
+        lst = self.qle.text()
+        lst = lst.split('-')
+        if len(lst) == 3 and lst[2] != "":
+            data = get_data(file, datetime.date(int(lst[0]), int(lst[1]), int(lst[2])))
+            if data != None:
+                self.lbl.setText(str(data))
+                self.lbl.adjustSize()
+
+
 
     def closeEvent(self, event):
 
@@ -31,6 +68,7 @@ class Example(QWidget):
         else:
             event.ignore()
 
+
     def center(self):
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
@@ -40,5 +78,6 @@ class Example(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = Example()
+    win = Example()
+    win.show()
     sys.exit(app.exec_())
