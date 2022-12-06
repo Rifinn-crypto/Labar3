@@ -5,10 +5,16 @@ import os
 class DateIterator:
 
     def __init__(self):
+        """
+                Initiation of Class
+                """
         self.counter = 0
         self.df = pd.read_csv("C:/Users/esh20/Desktop/dataset.csv")
 
     def __next__(self) -> tuple:
+        """
+         tuple with data and exchange rate for this data
+        """
         if os.path.exists("C:/Users/esh20/Desktop/dataset.csv"):
             if self.counter == self.df.shape[0]:
                 raise StopIteration
@@ -27,6 +33,9 @@ class DateIteratorXY:
         self.yf = pd.read_csv("C:/Users/esh20/PycharmProjects/Lab2/1/Y.csv")
 
     def __next__(self) -> tuple:
+        """
+        tuple with data and exchange rate for this data
+        """
         if self.counter == self.xf.shape[0]:
             raise StopIteration
 
@@ -48,6 +57,9 @@ class DateIteratorYearOrWeek:
                 self.df = pd.concat([self.df, yf], ignore_index=True)
 
     def __next__(self) -> tuple:
+        """
+        tuple with data and exchange rate for this data
+        """
         if self.counter == self.df.shape[0]:
             raise StopIteration
         elif self.counter < self.df.shape[0]:

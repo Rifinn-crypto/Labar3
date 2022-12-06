@@ -9,6 +9,7 @@ import numpy
 import pandas as pd
 from PyQt5.QtWidgets import QMainWindow, QPushButton, QApplication
 
+from get import tuple_for_next_data
 
 file = "C:/Users/esh20/Desktop/dataset.csv"
 
@@ -31,20 +32,27 @@ class Example(QMainWindow):
 
 
     def initUI(self):
+        """
+        The location of the button and the search bar.
+        Application icon design
+        """
         self.lbl = QLabel(self)
-        self.resize(250, 150)
+        self.resize(150, 150)
         self.center()
         butt = QPushButton("button 1", self)
         butt.move(30, 50)
         self.qle = QLineEdit(self)
-        self.qle.move(60, 100)
-        butt.setText("нажми")
+        self.qle.move(35, 100)
+        butt.setText("Получить")
         butt.clicked.connect(self.handleButton)
         self.setWindowTitle("Icon")
         self.setWindowIcon(QIcon("dollar.jpg"))
 
 
     def handleButton(self):
+        """
+        Search str
+        """
         self.lbl.setText("")
         self.lbl.adjustSize()
         lst = self.qle.text()
@@ -58,6 +66,10 @@ class Example(QMainWindow):
 
 
     def closeEvent(self, event):
+        """
+        Request to exit the program
+        param event:
+        """
 
         reply = QMessageBox.question(self, "Message",
                                      "Are you sure? You want quit?", QMessageBox.Yes |
@@ -70,6 +82,9 @@ class Example(QMainWindow):
 
 
     def center(self):
+        """
+        centering
+        """
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)

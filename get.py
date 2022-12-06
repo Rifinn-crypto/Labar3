@@ -14,6 +14,11 @@ def formatted_file(input_file: str) -> pd.DataFrame:
 
 
 def get_data(input_file: str, date: datetime.date) -> Union[numpy.float64, None]:
+    """
+         input_file: file with dataset
+         date: necessary date
+         return: value for necessary date
+        """
     if os.path.exists(input_file):
         df = formatted_file(input_file)
         for i in range(0, df.shape[0], 1):
@@ -25,6 +30,12 @@ def get_data(input_file: str, date: datetime.date) -> Union[numpy.float64, None]
 
 def get_data_xy(input_file_x: str, input_file_y: str,
                 date: datetime.date) -> Union[numpy.float64, None]:
+    """
+        input_file_x: file with column "Data"
+        input_file_y: file with column "Exchange rate"
+        date: necessary date
+        return: value for necessary date
+        """
     if os.path.exists(input_file_x) and os.path.exists(input_file_y):
 
         df_x = pd.read_csv(input_file_x)
@@ -43,7 +54,12 @@ def get_data_xy(input_file_x: str, input_file_y: str,
     raise FileNotFoundError
 
 def get_data_from_week_and_years(input_directory: str, date: datetime.date) -> Union[numpy.float64, None]:
-     if os.path.exists(input_directory):
+    """
+        input_directory: directory with sorted file by weeks or years
+        date: necessary date
+        return: value for necessary date
+        """
+    if os.path.exists(input_directory):
          for root, dirs, files in os.walk(input_directory):
              for filename in files[0: -1:]:
                  df = pd.read_csv(os.path.join(root, filename))
@@ -52,11 +68,14 @@ def get_data_from_week_and_years(input_directory: str, date: datetime.date) -> U
                      if df["Day"].iloc[i].replace("-", "") == str(date).replace("-", ""):
                          return df.iloc[i]["Exchange rate"]
 
-             return None
-     raise FileNotFoundError
+         return None
+    raise FileNotFoundError
 
 
 def tuple_for_next_data() -> tuple:
+    """
+    tuple with data and exchange rate for this data
+       """
     input_file = "C:/Users/esh20/Desktop/dataset.csv"
     if os.path.exists(input_file):
         df = pd.read_csv(input_file)
